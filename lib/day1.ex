@@ -4,19 +4,19 @@ defmodule Fuel do
   """
 
   def calculate_fuel do
-    Reader.readdata("d1")
+    Reader.read_data("d1")
     |> String.split("\r\n")
     |> Enum.map(&String.to_integer/1)
     |> Enum.map(&(div(&1, 3) - 2))
-    |> Enum.reduce(fn x, acc -> x + acc end)
+    |> Enum.sum()
   end
 
   def calculate_total_fuel do
-    Reader.readdata("d1")
+    Reader.read_data("d1")
     |> String.split("\r\n")
     |> Enum.map(&String.to_integer/1)
     |> Enum.map(&(fuel_requirement(&1)))
-    |> Enum.reduce(fn x, acc -> x + acc end)
+    |> Enum.sum()
   end
 
   def fuel_requirement(mass) do

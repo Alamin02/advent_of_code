@@ -3,7 +3,7 @@ defmodule Reader do
   Read data from file.
   """
 
-  def readdata(day) do
+  def read_data(day) do
     File.read!("#{File.cwd!()}/lib/data/#{day}.txt")
   end
 end
