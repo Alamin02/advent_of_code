@@ -4,16 +4,16 @@ defmodule Intcode2 do
         Reader.read_data("d2")
         |> String.split(",")
         |> Enum.map(&String.to_integer/1)
-        |> run(input_pairs(), 0)
+        |> run(input_pairs())
     end
 
-    def run(list, [{noun, verb} | rest], _) do
+    def run(list, [{noun, verb} | rest]) do
         new_list = add_inputs(list, noun, verb)
         
         opcode(new_list)
         |> case do
             19_690_720 -> 100 * noun + verb
-            _ ->run(list, rest, opcode(new_list))
+            _ -> run(list, rest)
         end
     end
 
