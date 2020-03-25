@@ -7,13 +7,14 @@ defmodule Intcode2 do
         |> run(input_pairs(), 0)
     end
 
-    def run(_, [{noun, verb} | _], 19690720) do
-        100 * noun + verb
-    end
-
     def run(list, [{noun, verb} | rest], _) do
         new_list = add_inputs(list, noun, verb)
-        run(list, rest, opcode(new_list))
+        
+        opcode(new_list)
+        |> case do
+            19_690_720 -> 100 * noun + verb
+            _ ->run(list, rest, opcode(new_list))
+        end
     end
 
     def add_inputs(list, noun, verb) do
